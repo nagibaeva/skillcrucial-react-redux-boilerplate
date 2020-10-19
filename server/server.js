@@ -74,11 +74,10 @@ server.post('/api/v1/users', async (req, res) => {
     console.log('Found file');
     users = JSON.parse(await readFile('users.json'));
   }
+  console.log('REQ', req.body);
   const newUser = {
     id: users.length + 1,
-    name: req.body.name,
-    username: req.body.username,
-    email: req.body.email
+    ...req.body
   };
   users.push(newUser);
   await createFile('users.json', JSON.stringify(users));
