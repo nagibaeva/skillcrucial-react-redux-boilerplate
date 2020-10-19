@@ -58,7 +58,7 @@ server.get('/api/v1/users', async (req, res) => {
   console.log('hello');
   if (await checkFile('users.json')) {
     console.log('Requested file found');
-    const users = await readFile('users.json');
+    const users = JSON.parse(await readFile('users.json'));
     res.json(users);
   } else {
     console.log('Requested file NOTE found');
