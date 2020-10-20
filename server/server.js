@@ -77,7 +77,7 @@ server.post('/api/v1/users', async (req, res) => {
   console.log('REQ', req.body);
   const newUser = {
     ...req.body,
-    id: users.length + 1
+    id: users.length > 0 ? users[users.length - 1].id + 1 : 1
   };
   users.push(newUser);
   await createFile('users.json', JSON.stringify(users));
