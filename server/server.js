@@ -67,7 +67,7 @@ server.get('/api/v1/users', async (req, res) => {
     res.json(users);
   }
 });
-// Route to post one additional user to fail users.json and save with id = id of last plus 1
+// Route to post one additional user to file users.json and save with id = id of last plus 1
 server.post('/api/v1/users', async (req, res) => {
   let users = [];
   if (await checkFile('users.json')) {
@@ -76,8 +76,8 @@ server.post('/api/v1/users', async (req, res) => {
   }
   console.log('REQ', req.body);
   const newUser = {
-    id: users.length + 1,
-    ...req.body
+    ...req.body,
+    id: users.length + 1
   };
   users.push(newUser);
   await createFile('users.json', JSON.stringify(users));
